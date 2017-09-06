@@ -63,10 +63,9 @@
     data: {
       logoUrl: 'https://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
       target: 'World',
-      tagImg:'http://localhost:8082/image/tag.png',
-      peopleImg:'http://localhost:8082/image/people.png',
-      diamondImg:'http://localhost:8082/image/diamond.png',
-      cover:"http://oslg9bt6h.bkt.clouddn.com/uploads/images/1500539189199",
+      tagImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/tag.png',
+      peopleImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/people.png',
+      diamondImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/diamond.png',
       matchList:[],
       h:0,
       showLoading: 'hide',
