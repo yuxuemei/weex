@@ -7,23 +7,79 @@
 		<div>
 			<div class="clumn-login row" style="margin-bottom: 0;border-bottom-width:1px; border-color:#3e331b;border-style: solid;">
                 <text class="clumn-tit">* 支付宝账号：</text>
-                <input type="text" class="input-login" placeholder="请输入你的支付宝账号" />
+                <input type="text" class="input-login" v-model="zhifubao" placeholder="请输入你的支付宝账号" />
             </div>
             <div class="clumn-login row" style="margin-top: 0;">
-                <text class="clumn-tit">* 手机号码：</text>
-                <input type="text" class="input-login" placeholder="请输入你的手机号码" />
+                <text class="clumn-tit">* 真实姓名</text>
+                <input type="text" class="input-login" v-model="realname" placeholder="请输入你的手机号码" />
             </div>
             <div class="clumn-login row" style="margin-top: 0;">
                 <text class="clumn-tit">* 验证码：</text>
-                <input type="password" class="input-login" placeholder="请输入你的验证码" />
-                <image class="get-code-btn" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/get-code-btn.png"></image>
+                <input type="text" class="input-login" v-model="code" placeholder="请输入你的验证码" />
+                <image class="get-code-btn" v-if="!isTimeOut" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/get-code-btn.png" @click="sendCode"></image>
+                <image class="get-code-btn" v-if="isTimeOut" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/code-time-bg.png"></image>
+                <text v-if="isTimeOut" class="time-num">{{timenum}}s</text>
             </div>
             <div class="center">
-            	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/bind-submit-btn.png" style="width: 633px;height: 75px;margin-left:59px;margin-top:20px;"></image>
+            	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/bind-submit-btn.png" style="width: 633px;height: 75px;margin-left:59px;margin-top:20px;" @click="bind"></image>
             </div>
 		</div>
 	</div>
 </template>
+<script>
+	const common = require('./common');
+	export default {
+	    data: {
+	        zhifubao:'',
+            mobile:'',
+            code:'',
+            timenum:60,
+            timefun:'',
+            isTimeOut:false,
+            mobile:'',
+            realname:''
+	    },
+	    methods: {
+	        bind:function(){
+	        	var param = {
+		        	pay:this.mobile,
+					code:this.code,
+					realname:this.realname
+	        	}
+	       	    common.post({
+		       	   	url:"api/bindPay",
+		       	   	param:JSON.stringify(param),
+		       	   	callback:respose=>{
+                        common.jump("exchange.js");
+	                }
+	       	   })
+	        },
+            timeOut(){
+                this.timenum -= 1;
+                if (this.timenum <= 0) {
+                    this.isTimeOut =false;
+                    clearInterval(this.timefun);
+                    this.timefun = '';
+                    this.timenum = 60;
+                    return;
+                }
+            },
+	        //发送验证码
+	        sendCode(){
+                common.post({
+                	url:"api/updatePayCode",
+                	callback:respose=>{
+                        this.isTimeOut = true;
+                        var _this = this;
+                        this.timefun = setInterval(function(){
+                            _this.timeOut();
+                        }, 1000);
+	                }
+                })
+	        }
+	    }
+    }
+</script>
 <style>
     .row{
 	    flex-direction: row;
@@ -84,5 +140,17 @@
         position: absolute;
         right: 40px;
         top:25px;
+	}
+	.time-num{
+		width: 144px;
+	    height: 39px;
+	    position: absolute;
+	    right: 40px;
+	    top:33px;
+	    text-align: center;
+	    font-size:22px;
+	    font-weight: bold;
+	    color: #000000;
+	    text-shadow: 0 0 1px #d2c184;
 	}
 </style>

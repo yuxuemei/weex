@@ -5,7 +5,7 @@
 		<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/stone.png" class="stone-img absolute" style="width: 750px;height: 735px;" ref="stone"></image>
 		<div  class="my-text relative">
 	    	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/home-text.png" style="width: 750px;height: 213px;"></image>
-	    	<text class="my-money center absolute">￥1200</text>
+	    	<text class="my-money center absolute">￥{{honor.price}}</text>
 	    	<text class="person-num absolute" v-text="honor.count"></text>
 	    </div>
 	    <div class="rule">
@@ -15,7 +15,7 @@
 	    	<text class="rule-text">查看规则</text>
 	    </div>
 	    <div style="margin-top:80px;">
-	    	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/apply-enter.png" style="width: 750px;height: 206px;"></image>
+	    	<image  @click="enterMeal" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/apply-enter.png" style="width: 750px;height: 206px;"></image>
 	    </div>
 	    <div style="margin-top:20px;">
 	    	<text class="more-about">想了解更多详情请加入QQ群：456792110</text>
@@ -23,7 +23,7 @@
 	</div>
 </template>
 <script>
-    const common = require('./common');
+    import common from './common';
 	export default {
 	    data: {
 	        isBegin:false,
@@ -37,7 +37,7 @@
 	    },
 	    mounted:function(){
 	    	this.getHonorInfo();
-	    	var element = this.$refs.stone;
+	    	/*var element = this.$refs.stone;
 	        common.animation.transition(element, {
 		        styles: {
 		            color: '#FF0000',
@@ -49,7 +49,7 @@
 		        delay: 0 //ms
 		        }, function () {
 		          common.modal.toast({ message: 'animation finished.' })
-		    })
+		    })*/
 	    },
 	    methods: {
 	        getHonorInfo:function(){
@@ -59,6 +59,9 @@
 		       	   		this.honor = respose.data.data;
 	                }
 	       	   })
+	        },
+	        enterMeal:function(){
+	        	
 	        }
 	    }
     }

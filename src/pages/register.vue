@@ -30,8 +30,8 @@
 	const common = require('./common');
 	export default {
 	    data: {
-	        mobile:'15928519944',
-	        password:'123456',
+	        mobile:'',
+	        password:'',
 	        code:'',
 	        timenum:60,
             timefun:'',

@@ -42,6 +42,7 @@
 		       	   	url:"api/user/login",
 		       	   	param:JSON.stringify(param),
 		       	   	callback:respose=>{
+		       	   		common.storage.setItem("token",respose.data.data.auth_token);
 		       	   		common.modal.toast({ message: "登录成功！"})
                         common.token = respose.data.data.auth_token;
                         this.getHonorStatus();

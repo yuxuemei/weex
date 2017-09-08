@@ -20,35 +20,11 @@
 		    	<image class="honor-title-img" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/honor-title1.png"></image>
 		    	<div class="relative">
 		    		<image class="honor-box-bg absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/honor-box.png"></image>
-		    		<div style="height:230px;margin-top:30px;padding-left: 30px;padding-top: 30px;padding-right: 30px;padding-bottom: 35px;">
+		    		<div style="height:225px;margin-top:60px;padding-left: 30px;padding-top: 30px;padding-right: 30px;padding-bottom: 35px;overflow: auto;">
 		    			<ul>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金59元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金59元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金5900元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金59元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金59元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金5900元</text>
-		    					<text class="honor-text">10分钟前</text>
-		    				</li>
-		    				<li class="row" style="height:32px;width:574px;">
-		    					<text class="honor-title">党晓***获得了助力金59元</text>
-		    					<text class="honor-text">10分钟前</text>
+		    				<li class="row" style="height:32px;width:574px;" v-for="(tag,index) in tagList" :key="index">
+		    					<text class="honor-title" v-text="tag.title"></text>
+		    					<text class="honor-text" v-text="tag.time"></text>
 		    				</li>
 		    			</ul>	
 		    		</div>
@@ -56,8 +32,10 @@
 		    </div>
 		    <div class="box">
 		    	<image class="honor-title-img" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/honor-title2.png"></image>
-		    	<div class="relative" style="margin-top:30px;">
-		    		<image class="team-box-bg absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/gold-box-bg.png"></image>
+		    	<div class="relative" style="margin-top:30px;" v-for="(honor_item,index) in myHonorList" :key="index">
+		    		<image class="team-box-bg absolute" v-if="honor_item.honor_id == 1" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/gold-box-bg.png"></image>
+		    		<image class="team-box-bg absolute" v-if="honor_item.honor_id == 2" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/silver-box-bg.png"></image>
+		    		<image class="team-box-bg absolute" v-if="honor_item.honor_id == 3" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/copper-box-bg.png"></image>
 		    		<div class="team_desc">
 		    			<text class="team_desc_text center">奖励发放通过奖励兑换，输入勋章数进行奖励兑换申请；奖励每周进行发放.</text>
 		    		</div>
@@ -65,46 +43,20 @@
 		    			<div class="team_item">
 		    			    <div class="row">
 			    			    <text class="team-text">我的战队成员：</text>
-			    			    <text class="team-text-number">10</text>
+			    			    <text class="team-text-number" v-text="honor_item.total_people"></text>
 			    			    <text class="team-text">人</text>
 		    			    </div>
 		    				<image class="opera-img absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/copy-btn.png"></image>
 		    			</div>
 		    			<div class="team_item">
-		    				<text class="team-text">我的荣誉勋章：5个</text>
+		    				<text class="team-text">我的荣誉勋章：{{honor_item.total_medal}}个</text>
 		    				<image class="meal-big absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/medal-big.png"></image>
 		    				<image class="opera-img absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/qrcode-btn.png"></image>
 		    			</div>
 		    		</div>
 		    		<div class="row center" style="margin-top:100px;">
 		    			<text class="code_text center">我的邀请码：</text>
-		    			<text class="code_text_value center">F8BDSLM</text>
-		    		</div>
-		    	</div>
-
-		    	<div class="relative" style="margin-top:65px;">
-		    		<image class="team-box-bg absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/copper-box-bg.png"></image>
-		    		<div class="team_desc">
-		    			<text class="team_desc_text center">奖励发放通过奖励兑换，输入勋章数进行奖励兑换申请；奖励每周进行发放.</text>
-		    		</div>
-		    		<div class="row team_detail relative">
-		    			<div class="team_item">
-		    			    <div class="row">
-			    			    <text class="team-text">我的战队成员：</text>
-			    			    <text class="team-text-number">10</text>
-			    			    <text class="team-text">人</text>
-		    			    </div>
-		    				<image class="opera-img absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/copy-btn.png"></image>
-		    			</div>
-		    			<div class="team_item">
-		    				<text class="team-text">我的荣誉勋章：5个</text>
-		    				<image class="meal-big absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/medal-big.png"></image>
-		    				<image class="opera-img absolute" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/qrcode-btn.png"></image>
-		    			</div>
-		    		</div>
-		    		<div class="row center" style="margin-top:100px;">
-		    			<text class="code_text center">我的邀请码：</text>
-		    			<text class="code_text_value center">F8BDSLM</text>
+		    			<text class="code_text_value center" v-text="honor_item.formcode"></text>
 		    		</div>
 		    	</div>
 		    </div>
@@ -114,6 +66,59 @@
 		</div>
 	</scroller>
 </template>
+<script>
+    require('./clipboard.min.js')
+    const common = require('./common');
+	export default{
+		data:function(){
+			return{
+				user:{},
+				honor:{},
+				myHonorList:[],
+				tagList:[],
+				my:{},
+				mealSum:0
+			}
+		},
+		mounted:function(){
+			this.getInfo();
+			this.getTag();
+			/*var clipboard = new Clipboard('.copy0');
+            var _this =this;
+            clipboard.on('success', function(e) {
+                _this.$store.state.isShow = true;
+                _this.$store.state.comfirmMessage = "复制成功";
+            });*/
+		},
+		methods:{
+			enterExchange(){
+				localStorage.mealSum = this.mealSum;
+                this.$router.push("/withdraw");
+			},
+			getInfo(){
+				common.get({
+                	url:"api/honor/info",
+                	callback:respose=>{
+                        this.honor = respose.data.data; 
+                        this.myHonorList = respose.data.data.honor;
+                        for (var j = 0; j < this.myHonorList.length; j++) {
+                            this.mealSum+=this.myHonorList[j].total_medal;
+                        }
+                        this.my = respose.data.data.my;
+	                }
+                })
+            },
+            getTag(){
+            	common.get({
+                	url:"api/honor/tags",
+                	callback:respose=>{
+                        this.tagList = respose.data;
+	                }
+                })
+            } 
+		}
+	}
+</script>
 <style>
     .row{
 	    flex-direction: row;

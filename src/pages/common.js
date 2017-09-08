@@ -8,8 +8,15 @@ export default{
     "stream":weex.requireModule('stream'),
     "navigator":weex.requireModule('navigator'),
     "animation":weex.requireModule('animation'),
+    "storage":weex.requireModule('storage'),
     "token":'',
+    "getToken":function(){
+        this.storage.getItem('token', event => {
+            this.token = event.data
+        })
+    },
     "get":function(obj){
+        this.getToken();
         return this.stream.fetch({
           method: 'GET',
           type:"json",
@@ -23,6 +30,7 @@ export default{
         })
     },
     "post":function(obj){
+        this.getToken();
         return this.stream.fetch({
           method: 'POST',
           type:"json",
@@ -47,5 +55,32 @@ export default{
             url: baseUrl+"/weex.html?hot-reload_controller&page="+url
         },function(){
         })
+    },
+    "getUrl":function(fileName,dir,host){
+        var bundleUrl = this.$getConfig().bundleUrl
+        var nativeBase;
+        var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+        var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+        if (isAndroidAssets) {
+            nativeBase = 'file://assets/';
+        }
+        else if (isiOSAssets) {
+            nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+        }
+        else {
+            host = host||'localhost:8080';
+            var matches = /\/\/([^\/]+?)\//.exec(bundleUrl);
+            if (matches && matches.length >= 2) {
+                host = matches[1];
+            }
+            nativeBase = 'http://' + host + '/' + dir + '/';
+        }
+        var h5Base = './index.html?page=./' + dir + '/';
+        // in Native
+        var base = nativeBase;
+        if (typeof window === 'object') {
+            base = h5Base;
+        }
+         return base+fileName;
     }
 }

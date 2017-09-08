@@ -12,11 +12,54 @@
                 <input type="password" class="input-login" style="width:650px;" placeholder="请输入你要兑换的勋章数量(最低兑换金额为10元)" />
             </div>
             <div class="center">
-            	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/exchange-submit-btn.png" style="width: 633px;height: 75px;margin-left:59px;margin-top:60px;"></image>
+            	<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/exchange-submit-btn.png" style="width: 633px;height: 75px;margin-left:59px;margin-top:60px;" @click="exchangeSubmit"></image>
             </div>
 		</div>
 	</div>
 </template>
+<script>
+	const common = require('./common');
+	export default {
+	    data: {
+	        money:'',
+            isBind:false,
+            mealSum:0
+	    },
+	    mounted:function(){
+	        this.getUserInfo();
+	    },
+	    methods: {
+	        getUserInfo(){
+                common.get({
+		       	   	url:"api/user/userinfo",
+		       	   	callback:respose=>{
+		       	   		if(respose.data.data.pay == ""){
+                            common.modal.toast({ message: "您还未绑定支付宝账号，请绑定,为您跳转到绑定页面！"})
+                        }else{
+                            this.isBind = true;
+                        }
+	                }
+	       	    })
+            },
+			exchangeSubmit(){
+				var param = {
+	        		money:this.money
+	        	};
+				common.post({
+		       	   	url:"api/honor/makemoney",
+		       	   	param:JSON.stringify(param),
+		       	   	callback:respose=>{
+		       	   		if(respose.data.data.pay == ""){
+                            common.modal.toast({ message: "提现成功！"})
+                        }else{
+                            this.isBind = true;
+                        }
+	                }
+	       	    })
+            }
+	    }
+    }
+</script>
 <style>
     :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
 	    color: #604e2b;

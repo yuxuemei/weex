@@ -1,57 +1,45 @@
+//定义路由
+//第一步导入路由模块vue-router和vue.js
 import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/pages/home/home'
-import Meal from '@/pages/meal/meal'
-import Rule from '@/pages/rule/rule'
-import My from '@/pages/user/my'
-import Login from '@/pages/user/login'
-import Register from '@/pages/user/register'
-import Bind from '@/pages/user/bind'
-import Recharge from '@/pages/recharge/recharge'
-import Withdraw from '@/pages/withdraw/withdraw'
-
+import Router from'vue-router'
+//第二步导入组件
+import home from'./../pages/home.vue'
+import login from './../pages/login.vue'
+//第三步让Vue使用vue-router当做自己的路由
 Vue.use(Router)
-
+//第四步创建路由对象
 export default new Router({
-  mode:'history', //去掉/#/
+  mode: 'abstract',
+  //weex中只能使用abstract类型默认可以不写系统会自动设置为abstract//定义路由
+  scrollBehavior:()=>({ // 滚动条滚动的行为，不加这个默认就会记忆原来滚动条的位置
+　　　y:0
+　}),
   routes: [
     {
       path: '/',
-      name: '首页',
-      component: Home
+      name:"首页",
+      component: home
     },
     {
-      path: '/meal',
-      name: '充值套餐',
-      component: Meal
-    },{
-      path: '/rule',
-      name: '规则介绍',
-      component: Rule
-    },{
-      path: '/my',
-      name: '竞联赛',
-      component: My
-    },{
-      path: '/recharge',
-      name: '充值',
-      component: Recharge
-    },{
-      path: '/withdraw',
-      name: '兑换',
-      component: Withdraw
-    },{
       path: '/login',
-      name: '登录',
-      component: Login
-    },{
-      path: '/register',
-      name: '注册',
-      component: Register
-    },{
-      path: '/bind',
-      name: '绑定支付宝',
-      component: Bind
+      name:"登录",
+      component: login
     }
+    /*{
+      path: '/article/:url(.*)?',
+      component: ArticleView
+    },
+    {
+      path: '/item/:id(\\d+)',
+      component: CommentView
+    },
+    {
+      path: '/user/:id',
+      component: UserView
+    },
+    {
+      path: '/',
+      redirect: '/home'
+    }*/
   ]
 })

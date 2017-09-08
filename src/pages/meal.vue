@@ -5,38 +5,33 @@
 		<div style="margin-left:255px;margin-top:40px;margin-bottom:30px;">
 			<image src="http://oslg9bt6h.bkt.clouddn.com/honor/img/meal-text.png" class="meal-text" alt="充值套餐"></image>
 		</div>
-        <div class="honor-item">
-            <image class="meal-content" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/meal1.png" alt="套餐" style="width:622px;height:250px;margin-bottom:25px;"></image>
-        </div>
-        <div class="honor-item">
-            <image class="meal-content" src="http://oslg9bt6h.bkt.clouddn.com/honor/img/meal1.png" alt="套餐" style="width:622px;height:250px;margin-bottom:25px;"></image>
+        <div class="honor-item" v-for="meal in mealList">
+            <image class="meal-content" :src="meal.cover" alt="套餐" style="width:622px;height:250px;margin-bottom:25px;"></image>
         </div>
 	</div>
 </template>
 <script>
-  var stream = weex.requireModule('stream');
-  var modal = weex.requireModule('modal');
-  var page = 1;
+  const common = require('./common');
   export default {
     data: {
       mealList:[]
     },
     mounted:function(){
-        /*this.getMealList(res => {
-            this.mealList = res.ok ? res.data.data : '(network error)';
-        })*/
+        this.getMealList();
     },
     methods: {
       update: function (e) {
         this.target = 'Weex'
         console.log('target:', this.target)
       },
-      getMealList (callback) {
-        return stream.fetch({
-          method: 'GET',
-          type: 'json',
-          url: 'https://api.91war.com/api/honor'
-        }, callback)
+      getMealList () {
+        common.get({
+          url:"api/honor",
+          callback:respose=>{
+            //跳转到用户相应状态的页面中
+              this.mealList = respose.data.data;
+          }
+        })
       }
     }
   }
