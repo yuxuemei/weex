@@ -29,13 +29,15 @@
 <script>
 	const common = require('./common');
 	export default {
-	    data: {
-	        mobile:'',
-	        password:'',
-	        code:'',
-	        timenum:60,
-            timefun:'',
-            isTimeOut:false
+	    data: function(){
+	    	return{
+	    		mobile:'',
+		        password:'',
+		        code:'',
+		        timenum:60,
+	            timefun:'',
+	            isTimeOut:false
+	    	}
 	    },
 	    methods: {
 	        register:function(){

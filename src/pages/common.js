@@ -1,6 +1,6 @@
 //http请求
 //import axios from 'axios'
-//import router from './../../router/index'
+import router from './../router/index'
 //store为实例化生成的
 //import store from './../../store/index'
 export default{
@@ -26,7 +26,14 @@ export default{
           },
           url: 'https://api.91war.com/' + obj.url
         },function(res){
-            res.ok ? obj.callback(res) : '(network error)'
+            if(res.ok){
+                obj.callback(res);
+            }else{
+                //this.modal.toast({ message: res.data.info});
+                if(res.data.info == "没有登录,请登录!"){
+                    //router.push("login");
+                }
+            }
         })
     },
     "post":function(obj){
@@ -49,12 +56,7 @@ export default{
         })
     },
     "jump":function(url){
-        var baseUrl = this.$getConfig().bundleUrl;
-        baseUrl = baseUrl.split('/').slice(0,-1).join('/');
-        common.navigator.push({
-            url: baseUrl+"/weex.html?hot-reload_controller&page="+url
-        },function(){
-        })
+        router.push(url);
     },
     "getUrl":function(fileName,dir,host){
         var bundleUrl = this.$getConfig().bundleUrl

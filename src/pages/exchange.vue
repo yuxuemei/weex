@@ -20,11 +20,13 @@
 <script>
 	const common = require('./common');
 	export default {
-	    data: {
-	        money:'',
-            isBind:false,
-            mealSum:0
-	    },
+	    data:function(){
+			return{	
+			     money:'',
+	            isBind:false,
+	            mealSum:0
+			}
+		},
 	    mounted:function(){
 	        this.getUserInfo();
 	    },

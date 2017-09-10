@@ -11,10 +11,12 @@
 	</div>
 </template>
 <script>
-  const common = require('./common');
+  import common from './common';
   export default {
-    data: {
-      mealList:[]
+    data: function(){
+    	return {
+    		mealList:[]
+    	}
     },
     mounted:function(){
         this.getMealList();

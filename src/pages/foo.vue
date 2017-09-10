@@ -60,16 +60,18 @@
   var modal = weex.requireModule('modal');
   var page = 1;
   export default {
-    data: {
-      logoUrl: 'https://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
-      target: 'World',
-      tagImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/tag.png',
-      peopleImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/people.png',
-      diamondImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/diamond.png',
-      matchList:[],
-      h:0,
-      showLoading: 'hide',
-      loading:"Loading ..."
+    data:function(){
+      return{ 
+          logoUrl: 'https://alibaba.github.io/weex/img/weex_logo_blue@3x.png',
+          target: 'World',
+          tagImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/tag.png',
+          peopleImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/people.png',
+          diamondImg:'http://oslg9bt6h.bkt.clouddn.com/honor/img/diamond.png',
+          matchList:[],
+          h:0,
+          showLoading: 'hide',
+          loading:"Loading ..."
+      }
     },
     mounted:function(){
       this.getMatchList(res => {

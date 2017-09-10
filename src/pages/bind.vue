@@ -29,16 +29,18 @@
 <script>
 	const common = require('./common');
 	export default {
-	    data: {
-	        zhifubao:'',
-            mobile:'',
-            code:'',
-            timenum:60,
-            timefun:'',
-            isTimeOut:false,
-            mobile:'',
-            realname:''
-	    },
+	    data:function(){
+			return{	
+			    zhifubao:'',
+	            mobile:'',
+	            code:'',
+	            timenum:60,
+	            timefun:'',
+	            isTimeOut:false,
+	            mobile:'',
+	            realname:''
+			}
+		},
 	    methods: {
 	        bind:function(){
 	        	var param = {

@@ -23,15 +23,14 @@
 	</div>
 </template>
 <script>
-    const common = require('./common');
+    import common from './common';
 	export default {
-	    data: {
-	        mobile:'15928519944',
-	        password:'123456'
-	    },
-	    mounted:function(){
-	     
-	    },
+	    data:function(){
+			return{	
+			    mobile:'15928519944',
+	            password:'123456'
+			}
+		},
 	    methods: {
 	        login:function(){
 	        	var param = {

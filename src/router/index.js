@@ -3,8 +3,9 @@
 import Vue from 'vue'
 import Router from'vue-router'
 //第二步导入组件
-import home from'./../pages/home.vue'
-import login from './../pages/login.vue'
+import Home from'./../pages/home.vue'
+import Login from './../pages/login.vue'
+import Meal from './../pages/meal.vue'
 //第三步让Vue使用vue-router当做自己的路由
 Vue.use(Router)
 //第四步创建路由对象
@@ -18,12 +19,17 @@ export default new Router({
     {
       path: '/',
       name:"首页",
-      component: home
+      component: Home
     },
     {
       path: '/login',
       name:"登录",
-      component: login
+      component: Login
+    },
+    {
+      path: '/meal',
+      name:"套餐",
+      component: Meal
     }
     /*{
       path: '/article/:url(.*)?',

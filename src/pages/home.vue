@@ -20,21 +20,24 @@
 	    <div style="margin-top:20px;">
 	    	<text class="more-about">想了解更多详情请加入QQ群：456792110</text>
 	    </div>
+	    <router-view></router-view>
 	</div>
 </template>
 <script>
     import common from './common';
 	export default {
-	    data: {
-	        isBegin:false,
-			moneyStyle:{
-				width:"64px"
-			},
-			honor:{
-				price:0,
-				count:0
+	    data:function(){
+			return{	
+			    isBegin:false,
+				moneyStyle:{
+					width:"64px"
+				},
+				honor:{
+					price:0,
+					count:0
+				}
 			}
-	    },
+		},
 	    mounted:function(){
 	    	this.getHonorInfo();
 	    	/*var element = this.$refs.stone;
@@ -61,7 +64,12 @@
 	       	   })
 	        },
 	        enterMeal:function(){
-	        	
+	        	this.$router.push('/meal')
+	        	/*const toUrl = weex.config.bundleUrl.split('/').slice(0, -1).join('/') + '/meal.js' // 将a.js的绝对地址转为b.js的绝对地址
+		         common.navigator.push({
+		            url: toUrl,
+		            animated: 'true'
+		        })*/
 	        }
 	    }
     }
